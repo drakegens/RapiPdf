@@ -120,6 +120,15 @@ function getParameterTableDef(parameters, paramType, localize, includeExample = 
       { text: localize.description, style: ['sub', 'b', 'alternate'] },
     ],
   ];
+
+  // if (spec.info.description) {
+  //   specInfDescrMarkDef = {
+  //     stack: markdownToPdfmake(spec.info.description),
+  //     style: ['topMargin3'],
+  //   };
+  // } else {
+  //   specInfDescrMarkDef = '';
+  // }
   if (paramType === 'FORM DATA') {
     for (const paramName in parameters) {
       const param = parameters[paramName];
@@ -132,7 +141,9 @@ function getParameterTableDef(parameters, paramType, localize, includeExample = 
         { text: paramName, style: ['small', 'mono'] },
         { text: type + format, style: ['small', 'mono'] },
         { text: includeExample ? (param.example ? param.example : (param.examples && param.examples[0] ? param.examples[0] : '')) : '', style: ['small'], margin: [0, 2, 0, 0] },
-        { text: param.description, style: ['small'], margin: [0, 2, 0, 0] },
+        // changing this line
+        // { text: param.description, style: ['small'], margin: [0, 2, 0, 0] },
+        { text: markdownToPdfmake(param.description), style: ['small'], margin: [0, 2, 0, 0] },
       ]);
     }
   } else {
@@ -161,7 +172,9 @@ function getParameterTableDef(parameters, paramType, localize, includeExample = 
           ],
         },
         { text: includeExample ? (param.example ? param.example : (param.examples && param.examples[0] ? param.examples[0] : '')) : '', style: ['small'], margin: [0, 2, 0, 0] },
-        { text: param.description, style: ['small'], margin: [0, 2, 0, 0] },
+        // changing this line below
+        // { text: param.description, style: ['small'], margin: [0, 2, 0, 0] },
+        { text: markdownToPdfmake(param.description), style: ['small'], margin: [0, 2, 0, 0] },
       ]);
     });
   }
